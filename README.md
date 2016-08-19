@@ -30,31 +30,24 @@ $ chef exec bundle install
 ## Usage
 
 1. First make sure you've followed the instructions under Installation (above), and have 
-Added the gem to your `Gemfile` and run `chef exec bundle install`. This will make
+added the gem to your `Gemfile` and run `chef exec bundle install`. This will make
 the gem available from within your chef run.
 
-2. Create chef attributes JSON file
-
-Create a file in your project's root directory called 'zero.json' which contains any
+2. Create JSON a file in your project's root directory called 'zero.json' which contains any
 chef attributes you wish to set for the chef-zero run. At a minimum just
 set the runlist. For example:
-
 ```
 {
     "run_list": [ "recipe[devbox::default]" ]
 }
 ```
 
-3. Add rake task
-
-Add the following to your Rakefile to include the rake task:
-
+3. Add the following to your Rakefile to include the rake task:
 ```
 require 'chefzero_simple/rake/task'
 ```
 
 4. Run the rake task
-
 ```
 chef exec rake chefzero_simple
 ```
