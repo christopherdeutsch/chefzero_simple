@@ -12,6 +12,5 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bundler
   chefzero_simple!
-  rake
+  rake (~> 11.2)

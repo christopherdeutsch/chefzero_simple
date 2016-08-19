@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["chef@ispeakdeutsch.com"]
 
   spec.summary       = %q{helper for running chef-zero on unmanaged nodes}
-  spec.description   = %q{helper for running chef-zero on unmanaged nodes}
+  spec.description   = %q{helper for running chef-zero on unmanaged nodes such as developer workstations}
   spec.homepage      = "https://github.com/ispeakdeutsch/chefzero_simple"
   spec.license       = "MIT"
 
@@ -30,6 +30,5 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
-  spec.add_development_dependency "bundler"
-  spec.add_development_dependency "rake"
+  spec.add_development_dependency "rake", "~> 11.2"
 end

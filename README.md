@@ -7,33 +7,35 @@ VirtualBox VM.
 * This gem should not be used for managed nodes! Use chef server.
 * This gem should not be used for testing! Use test kitchen.
 
-## Installation
-
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'chefzero_simple'
-```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install chefzero_simple
-
 ## Prerequisites
 
 * Your project must use Berkshelf to manage cookbook dependencies
 * ChefDK must be installed
-* sudo (optional)
+* sudo
+
+## Installation
+
+Add this line to your chef cookbook's Gemfile:
+
+```ruby
+gem "chefzero_simple", :git => "https://github.com/christopherdeutsch/chefzero_simple.git"
+```
+
+And then execute:
+
+```
+$ chef exec bundle install
+```
 
 ## Usage
 
-1. Create chef attributes JSON file
+1. First make sure you've followed the instructions under Installation (above), and have 
+Added the gem to your `Gemfile` and run `chef exec bundle install`. This will make
+the gem available from within your chef run.
 
-Create a file in your project called 'zero.json' which contains any
+2. Create chef attributes JSON file
+
+Create a file in your project's root directory called 'zero.json' which contains any
 chef attributes you wish to set for the chef-zero run. At a minimum just
 set the runlist. For example:
 
@@ -43,18 +45,18 @@ set the runlist. For example:
 }
 ```
 
-2. Add rake task
+3. Add rake task
 
-Add the following to your Rakefile:
+Add the following to your Rakefile to include the rake task:
 
 ```
 require 'chefzero_simple/rake/task'
 ```
 
-3. Run rake task
+4. Run the rake task
 
 ```
-rake chefzero_simple
+chef exec rake chefzero_simple
 ```
 
 ## Optional: Customizing rake task options
@@ -75,7 +77,7 @@ $ rake chefzero_simple[true,custom.json]
 You can also customize the options passed to the rake task in your own
 Rakefile. For example:
 
-```
+```ruby
 desc "install developer workstation packages"
 task :install
   Rake::Task[:chefzero_simple].invoke(true, 'custom.json')
@@ -85,7 +87,6 @@ end
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/ispeakdeutsch/chefzero_simple.
-
 
 ## License
 
