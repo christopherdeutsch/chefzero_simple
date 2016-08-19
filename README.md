@@ -1,8 +1,11 @@
 # ChefzeroSimple
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/chefzero_simple`. To experiment with that code, run `bin/console` for an interactive prompt.
+Add a rake task to facilitate running chef-zero locally on an unmanaged node. 
+For example, it can be used to bootstrap a developer workstation, or a single 
+VirtualBox VM.
 
-TODO: Delete this and the text above, and describe your gem
+* This gem should not be used for managed nodes! Use chef server.
+* This gem should not be used for testing! Use test kitchen.
 
 ## Installation
 
@@ -20,19 +23,68 @@ Or install it yourself as:
 
     $ gem install chefzero_simple
 
+## Prerequisites
+
+* Your project must use Berkshelf to manage cookbook dependencies
+* ChefDK must be installed
+* sudo (optional)
+
 ## Usage
 
-TODO: Write usage instructions here
+1. Create chef attributes JSON file
 
-## Development
+Create a file in your project called 'zero.json' which contains any
+chef attributes you wish to set for the chef-zero run. At a minimum just
+set the runlist. For example:
 
-After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+```
+{
+    "run_list": [ "recipe[devbox::default]" ]
+}
+```
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+2. Add rake task
+
+Add the following to your Rakefile:
+
+```
+require 'chefzero_simple/rake/task'
+```
+
+3. Run rake task
+
+```
+rake chefzero_simple
+```
+
+## Optional: Customizing rake task options
+
+The syntax for the rake task is:
+
+```
+$ rake chefzero_simple[ <use_sudo>, <json_attribute_file_name> ]
+```
+
+For example, to run chef-client with sudo and use the JSON attribute file
+`custom.json`:
+
+```
+$ rake chefzero_simple[true,custom.json]
+```
+
+You can also customize the options passed to the rake task in your own
+Rakefile. For example:
+
+```
+desc "install developer workstation packages"
+task :install
+  Rake::Task[:chefzero_simple].invoke(true, 'custom.json')
+end
+```
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/chefzero_simple.
+Bug reports and pull requests are welcome on GitHub at https://github.com/ispeakdeutsch/chefzero_simple.
 
 
 ## License
