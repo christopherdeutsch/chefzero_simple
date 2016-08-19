@@ -35,20 +35,17 @@ the gem available from within your chef run.
 
 2. Create JSON a file in your project's root directory called 'zero.json' which contains any
 chef attributes you wish to set for the chef-zero run. At a minimum just
-set the runlist. For example:
-```
+set the runlist. For example: ```
 {
     "run_list": [ "recipe[devbox::default]" ]
 }
 ```
 
-3. Add the following to your Rakefile to include the rake task:
-```
+3. Add the following to your Rakefile to include the rake task: ```
 require 'chefzero_simple/rake/task'
 ```
 
-4. Run the rake task
-```
+4. Run the rake task ```
 chef exec rake chefzero_simple
 ```
 
