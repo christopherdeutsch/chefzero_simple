@@ -43,7 +43,11 @@ set the runlist. For example:
   }
   ```
 
-3. Add the following to your Rakefile to include the rake task: `require 'chefzero_simple/rake/task'`
+3. Add the following to your Rakefile to include the rake task: 
+
+  ```
+  require 'chefzero_simple/rake/task'
+  ```
 
 4. Run the rake task: `chef exec rake chefzero_simple`
 
@@ -52,14 +56,14 @@ set the runlist. For example:
 The syntax for the rake task is:
 
 ```
-$ rake chefzero_simple[ <use_sudo>, <json_attribute_file_name> ]
+$ chef exec rake chefzero_simple[ <use_sudo>, <json_attribute_file_name> ]
 ```
 
 For example, to run chef-client with sudo and use the JSON attribute file
 `custom.json`:
 
 ```
-$ rake chefzero_simple[true,custom.json]
+$ chef exec rake chefzero_simple[true,custom.json]
 ```
 
 You can also customize the options passed to the rake task in your own
