@@ -1,8 +1,12 @@
 #
 # simple knife.rb for running chef-zero locally
 #
-dir = File.join(Dir.tmpdir, 'chefzero_simple')
+require 'tmpdir'
 
-file_cache_path File.join(dir, 'cache')
-node_path       File.join(dir, 'nodes')
-cookbook_path   File.join(dir, 'berks-cookbooks')
+tmpdir = File.join(Dir.tmpdir, 'chefzero_simple')
+
+STDERR.puts "chefzero_simple using temporary directory \"#{dir}\""
+
+file_cache_path File.join(tmpdir, 'cache')
+node_path       File.join(tmpdir, 'nodes')
+cookbook_path   File.join(tmpdir, 'berks-cookbooks')
