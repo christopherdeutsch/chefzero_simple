@@ -38,6 +38,6 @@ task :chefzero_simple, [:sudo, :json] do |t,args|
   chef_opts << "-j #{json_attrs}"
   chef_opts << "-c #{File.join(dir, 'zero.rb')}"
 
-  sh "#{use_sudo ? "sudo " : ""}chef exec berks vendor #{berks_dir}"
-  sh "#{use_sudo ? "sudo " : ""}chef exec chef-client #{chef_opts.join(' ')}"
+  sh "#{use_sudo ? "sudo " : ""}TMPDIR=#{tmpdir} chef exec berks vendor #{berks_dir}"
+  sh "#{use_sudo ? "sudo " : ""}TMPDIR=#{tmpdir} chef exec chef-client #{chef_opts.join(' ')}"
 end
